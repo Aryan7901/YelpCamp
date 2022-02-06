@@ -1,0 +1,69 @@
+<% layout('/layouts/boilerplate') %>
+
+<form action="/campgrounds" method="POST" class="needs-validation" novalidate>
+  <section class="row">
+    <div class="mb-3 col-8 offset-2">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        name="campground[title]"
+        required
+      />
+      <div class="invalid-feedback">This field is required!</div>
+      <div class="valid-feedback">Looks Good!</div>
+    </div>
+    <div class="mb-3 col-8 offset-2">
+      <label for="location" class="form-label">Location</label>
+      <input
+        type="text"
+        class="form-control"
+        id="location"
+        name="campground[location]"
+        required
+      />
+      <div class="invalid-feedback">This field is required!</div>
+      <div class="valid-feedback">Looks Good!</div>
+    </div>
+    <div class="mb-3 col-8 offset-2">
+      <label class="visually-hidden" for="price">price</label>
+      <div class="input-group">
+        <div class="input-group-text">$</div>
+        <input
+          type="text"
+          class="form-control"
+          id="price"
+          placeholder="price"
+          name="campground[price]"
+          required
+        />
+        <div class="invalid-feedback">This field is required!</div>
+        <div class="valid-feedback">Looks Good!</div>
+      </div>
+    </div>
+    <div class="mb-3 col-8 offset-2">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        id="description"
+        class="form-control"
+        name="campground[description]"
+      ></textarea>
+    </div>
+    <div class="mb-3 col-8 offset-2">
+      <label for="image" class="form-label">Image src</label>
+      <input
+        type="text"
+        class="form-control"
+        id="image"
+        name="campground[image]"
+        required
+      />
+      <div class="invalid-feedback">This field is required!</div>
+      <div class="valid-feedback">Looks Good!</div>
+    </div>
+    <button class="btn mycolor text-light mb-3 col-4 offset-4">
+      Add Campground
+    </button>
+  </section>
+</form>

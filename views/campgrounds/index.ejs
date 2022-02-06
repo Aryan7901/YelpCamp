@@ -1,0 +1,25 @@
+<% layout('/layouts/boilerplate') %>
+<p class="fs-2 ctext">Campgrounds</p>
+
+<% for(camp of camps) { %>
+<section class="card size m-3 w">
+  <div class="row">
+    <div class="col-4">
+      <img
+        src="<%=camp.image %> "
+        class="card-img img-fluid size"
+        alt="image"
+      />
+    </div>
+    <div class="col-8">
+      <a
+        href="/campgrounds/<%=camp._id%>"
+        class="text-decoration-none card-title ctext fs-5"
+        ><%= camp.title %></a
+      >
+      <p class="card-text"><%=camp.description%></p>
+      <p class="text-muted card-text"><%= camp.location%></p>
+    </div>
+  </div>
+</section>
+<% } %>

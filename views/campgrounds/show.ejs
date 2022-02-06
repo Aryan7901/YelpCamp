@@ -1,0 +1,74 @@
+<% layout('/layouts/boilerplate') %>
+
+<section class="my-3">
+  <div class="row">
+    <div class="col-6 border offset-3 min">
+      <img
+        src="<%=camp.image %> "
+        class="card-img img-fluid size"
+        alt="image"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 border offset-3 min">
+      <div class="text-center">
+        <a
+          href="/campgrounds/<%=camp._id%>"
+          class="text-decoration-none card-title ctext fs-5"
+          ><%= camp.title %></a
+        >
+      </div>
+      <p class="card-text text-break"><%=camp.description%></p>
+      <div class="d-flex justify-content-center">
+        <p class="text-muted card-text"><%= camp.location%></p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 border offset-3 min d-flex justify-content-center">
+      <p class="text-muted">Price:$<%=camp.price%></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 border offset-3 min d-flex justify-content-center">
+      <form action="/campgrounds/<%=camp._id%>/edit">
+        <button class="btn btn-info text-light mx-2 px-4" href="/">Edit</button>
+      </form>
+      <form action="/campgrounds/<%=camp._id%>?_=DELETE" method="POST">
+        <button class="btn btn-danger px-3">Delete</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <form
+      class="col-6 offset-3 border needs-validation"
+      action="/campgrounds/<%=camp._id%>/reviews"
+      method="POST"
+      novalidate
+    >
+      <h3 class="ctext">Leave a Review</h3>
+      <label for="review[rating]" class="form-label">Rating</label>
+      <input
+        type="range"
+        class="form-range"
+        id="review[rating]"
+        name="review[rating]"
+        min="0"
+        max="5"
+      />
+      <div class="mb-3">
+        <label for="review[body]" class="form-label">Comments</label>
+        <textarea
+          class="form-control"
+          id="review[body]"
+          name="review[body]"
+          rows="3"
+          required
+        ></textarea>
+        <div class="valid-feedback">Looks Good</div>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+</section>
