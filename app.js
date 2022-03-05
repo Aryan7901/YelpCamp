@@ -11,7 +11,7 @@ const ThrowError = require("./utils/ThrowError");
 const { campgroundSchema, reviewSchema } = require("./schemas");
 const review = require("./models/review");
 
-mongoose.connect("mongodb://localhost:27017/yelp-camp", {
+mongoose.connect(process.env.DB || "mongodb://localhost:27017/yelp-camp", {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -53,6 +53,7 @@ app.get(
     res.render("campgrounds/index", { camps });
   })
 );
+
 app.get("/campgrounds/new", (req, res) => {
   res.render("campgrounds/new");
 });
@@ -60,7 +61,7 @@ app.get(
   "/campgrounds/:id",
   wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const camp = await campGround.findById(id);
+    const camp = await campGround.findById(id).populate("reviews");
     res.render("campgrounds/show", { camp });
   })
 );
@@ -70,6 +71,13 @@ app.get(
     const { id } = req.params;
     const camp = await campGround.findById(id);
     res.render("campgrounds/edit", { camp });
+  })
+);
+app.get(
+  "/",
+  wrapAsync(async (req, res) => {
+    const camps = await campGround.find({});
+    res.render("campgrounds/index", { camps });
   })
 );
 // app.get("/makecampground", wrapAsync(async (req, res) => {
@@ -139,6 +147,6 @@ app.use((err, req, res, next) => {
 
   res.status(statusCode).render("campgrounds/error", { err });
 });
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Serving on port 3000");
 });

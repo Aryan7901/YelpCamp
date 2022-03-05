@@ -2,16 +2,17 @@
 
 <section class="my-3">
   <div class="row">
-    <div class="col-6 border offset-3 min">
+    <div class="col-md-6 border offset-md-3 min">
       <img
         src="<%=camp.image %> "
         class="card-img img-fluid size"
         alt="image"
+        style="object-fit: contain"
       />
     </div>
   </div>
   <div class="row">
-    <div class="col-6 border offset-3 min">
+    <div class="col-md-6 border offset-md-3 min">
       <div class="text-center">
         <a
           href="/campgrounds/<%=camp._id%>"
@@ -26,12 +27,12 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-6 border offset-3 min d-flex justify-content-center">
+    <div class="col-md-6 border offset-md-3 min d-flex justify-content-center">
       <p class="text-muted">Price:$<%=camp.price%></p>
     </div>
   </div>
   <div class="row">
-    <div class="col-6 border offset-3 min d-flex justify-content-center">
+    <div class="col-md-6 border offset-md-3 min d-flex justify-content-center">
       <form action="/campgrounds/<%=camp._id%>/edit">
         <button class="btn btn-info text-light mx-2 px-4" href="/">Edit</button>
       </form>
@@ -42,7 +43,7 @@
   </div>
   <div class="row">
     <form
-      class="col-6 offset-3 border needs-validation"
+      class="col-md-6 offset-md-3 border needs-validation"
       action="/campgrounds/<%=camp._id%>/reviews"
       method="POST"
       novalidate
@@ -70,5 +71,24 @@
       </div>
       <button type="submit" class="btn btn-success">Submit</button>
     </form>
+  </div>
+  <div class="row">
+    <% for (review of camp.reviews) {%>
+    <div class="col-md-6 border offset-md-3 min">
+      <% if (review.rating===1) { %>
+      <p>⭐</p>
+      <% } %> <% if (review.rating===2) { %>
+      <p>⭐⭐</p>
+      <% } %> <% if (review.rating===3) { %>
+      <p>⭐⭐⭐</p>
+      <% } %> <% if (review.rating===4) { %>
+      <p>⭐⭐⭐⭐</p>
+      <% } %> <% if (review.rating===5) { %>
+      <p>⭐⭐⭐⭐⭐</p>
+      <% } %>
+      <p class="text-break"></p>
+      <p class="text-break"><%= review.body%></p>
+    </div>
+    <% } %>
   </div>
 </section>
